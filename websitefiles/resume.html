@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Layna Michel-Martinez — Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:  #0b1628;
+      --navy2: #0f2040;
+      --coral: #e8522a;
+      --gold:  #f5b942;
+      --white: #fafaf8;
+      --off:   #f2efe9;
+      --muted: #7a7a72;
+      --rule:  #ddd9d0;
+      --ink:   #1c1c1a;
+    }
+
+    html { font-size: 15px; }
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    /* ─── LAYOUT ─── */
+    .page {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    /* ─── LEFT SIDEBAR ─── */
+    .sidebar {
+      background: var(--navy);
+      padding: 52px 32px 52px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .name-block { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 32px; }
+    .name-block .first {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: white;
+      line-height: 1.1;
+      display: block;
+    }
+    .name-block .last {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--coral);
+      line-height: 1.1;
+      display: block;
+    }
+    .name-block .title {
+      margin-top: 14px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+    }
+
+    /* sidebar sections */
+    .sb-section {}
+    .sb-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sb-label::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+
+    /* contact */
+    .contact-list { display: flex; flex-direction: column; gap: 10px; }
+    .contact-item { font-size: 0.78rem; font-weight: 300; color: rgba(255,255,255,0.65); display: flex; gap: 10px; align-items: flex-start; }
+    .contact-item a { color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+    .contact-item a:hover { color: var(--coral); }
+    .c-icon { color: var(--coral); font-size: 0.7rem; margin-top: 2px; min-width: 14px; }
+
+    /* skills */
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      padding: 4px 9px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.2s, color 0.2s;
+    }
+    .skill-tag:hover { background: var(--coral); color: white; border-color: var(--coral); }
+    .skill-tag.core { background: rgba(232,82,42,0.15); color: rgba(255,255,255,0.8); border-color: rgba(232,82,42,0.3); }
+
+    /* education */
+    .edu-list { display: flex; flex-direction: column; gap: 16px; }
+    .edu-item {}
+    .edu-degree { font-size: 0.82rem; font-weight: 500; color: white; margin-bottom: 2px; }
+    .edu-school { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); }
+
+    /* languages */
+    .lang-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .lang-pill { font-size: 0.75rem; font-weight: 500; color: rgba(255,255,255,0.7); padding: 4px 12px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); }
+
+    /* philosophy */
+    .philosophy {
+      background: rgba(232,82,42,0.12);
+      border-left: 3px solid var(--coral);
+      padding: 16px 18px;
+      margin-top: auto;
+    }
+    .philosophy p {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.82rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.55;
+    }
+
+    /* ─── RIGHT / MAIN ─── */
+    .main { padding: 52px 52px 52px 48px; }
+
+    /* summary strip */
+    .summary-strip {
+      background: var(--coral);
+      padding: 28px 32px;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .summary-strip::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold);
+    }
+    .summary-strip p {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: white;
+      line-height: 1.65;
+      max-width: 600px;
+    }
+    .summary-strip p strong { font-weight: 600; }
+
+    /* section headers */
+    .section { margin-bottom: 44px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: var(--ink);
+    }
+
+    /* experience entries */
+    .exp-entry { margin-bottom: 36px; padding-bottom: 36px; border-bottom: 1px solid var(--rule); }
+    .exp-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .exp-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; gap: 16px; }
+    .exp-role {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .exp-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 3px;
+    }
+    .exp-org {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 10px;
+    }
+    .exp-tools {
+      display: flex; flex-wrap: wrap; gap: 5px;
+      margin-bottom: 14px;
+    }
+    .tool-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      padding: 2px 7px;
+      background: var(--off);
+      color: var(--muted);
+      border: 1px solid var(--rule);
+    }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .exp-bullets li {
+      font-size: 0.84rem;
+      font-weight: 300;
+      color: #3a3a38;
+      padding-left: 18px;
+      position: relative;
+      line-height: 1.55;
+    }
+    .exp-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--coral);
+      font-size: 0.6rem;
+      top: 3px;
+    }
+    .exp-bullets li strong { font-weight: 500; color: var(--ink); }
+
+    /* highlight badge */
+    .highlight {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      margin-left: 8px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+
+    /* print / download bar */
+    .top-bar {
+      background: var(--navy);
+      padding: 14px 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-bar .tb-brand {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      text-decoration: none;
+    }
+    .top-bar .tb-brand span { color: var(--coral); }
+    .top-bar .dl-btn {
+      background: var(--coral);
+      color: white;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .top-bar .dl-btn:hover { background: #c94420; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .page { animation: fadeUp 0.5s ease both; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 780px) {
+      .page { grid-template-columns: 1fr; }
+      .sidebar { padding: 40px 28px; }
+      .main { padding: 40px 28px; }
+      .top-bar { padding: 14px 24px; }
+    }
+
+    /* ─── PRINT ─── */
+    @media print {
+      .top-bar { display: none; }
+      .page { max-width: 100%; box-shadow: none; }
+      body { font-size: 13px; }
+      .sidebar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .summary-strip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .exp-entry { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a class="tb-brand" href="index.html">LC<span> |</span> Digital Strategy</a>
+  <a class="dl-btn" href="layna-michel-martinez-resume.pdf" download>↓ Download PDF</a>
+</div>
+
+<div class="page">
+
+  <!-- ═══════════════ SIDEBAR ═══════════════ -->
+  <aside class="sidebar">
+
+    <div class="name-block">
+      <span class="first">Layna</span>
+      <span class="last">Michel-Martinez</span>
+      <p class="title">Director of Content Design<br>& Change Communication</p>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">Contact</div>
+      <div class="contact-list">
+        <div class="contact-item">
+          <span class="c-icon">✉</span>
+          <a href="mailto:layna.r.martinez@gmail.com">layna.r.martinez@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <span class="c-icon">⌂</span>
+          <span>Boston, MA</span>
+        </div>
+        <div class="contact-item">
+          <span class="c-icon">↗</span>
+          <a href="https://lcdigitalstrategy.com" target="_blank">lcdigitalstrategy.com</a>
+        </div>
+        <div class="contact-item">
+          <span class="c-icon">in</span>
+          <a href="#" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">Core Skills</div>
+      <div class="skill-tags">
+        <span class="skill-tag core">Digital Strategy</span>
+        <span class="skill-tag core">UX Design</span>
+        <span class="skill-tag core">Change Comms</span>
+        <span class="skill-tag core">Content Strategy</span>
+        <span class="skill-tag core">Audience Segmentation</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">Google Analytics</span>
+        <span class="skill-tag">Adobe Creative Suite</span>
+        <span class="skill-tag">Drupal</span>
+        <span class="skill-tag">Figma / Sketch</span>
+        <span class="skill-tag">Salesforce</span>
+        <span class="skill-tag">Adobe XM</span>
+        <span class="skill-tag">Canva</span>
+        <span class="skill-tag">Asana</span>
+        <span class="skill-tag">Shopify</span>
+        <span class="skill-tag">Pardot</span>
+        <span class="skill-tag">HTML</span>
+        <span class="skill-tag">Hotjar</span>
+        <span class="skill-tag">Ahrefs</span>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">Education</div>
+      <div class="edu-list">
+        <div class="edu-item">
+          <div class="edu-degree">MBA, Business</div>
+          <div class="edu-school">Northeastern University</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">MA, Creative Writing</div>
+          <div class="edu-school">Naropa University</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">BA, English</div>
+          <div class="edu-school">University of Wisconsin</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">Languages</div>
+      <div class="lang-row">
+        <span class="lang-pill">English</span>
+        <span class="lang-pill">Spanish</span>
+      </div>
+    </div>
+
+    <div class="philosophy">
+      <p>"I want to work somewhere that makes a difference and celebrates its people. We spend a lot of our lives at work. I want to be proud of what I do and who I work for."</p>
+    </div>
+
+  </aside>
+
+  <!-- ═══════════════ MAIN ═══════════════ -->
+  <main class="main">
+
+    <div class="summary-strip">
+      <p>Digital strategist with a decade of experience turning <strong>complex ideas into things people actually understand and act on</strong> — across transit, academia, political campaigns, and global brands. I build the systems, campaigns, and content that connect organizations to their audiences, and I geek out on the data that tells me what's working.</p>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="section">
+      <div class="section-header"><h2>Experience</h2></div>
+
+      <!-- MBTA -->
+      <div class="exp-entry">
+        <div class="exp-top">
+          <div class="exp-role">Director of Content Design & Change Communication</div>
+          <div class="exp-date">Nov 2023 — Present</div>
+        </div>
+        <div class="exp-org">Massachusetts Bay Transit Authority (MBTA)</div>
+        <div class="exp-tools">
+          <span class="tool-tag">Adobe Creative Suite</span><span class="tool-tag">Tableau</span>
+          <span class="tool-tag">Google Analytics</span><span class="tool-tag">Canva</span>
+          <span class="tool-tag">Adobe XM</span><span class="tool-tag">Asana</span><span class="tool-tag">Drupal</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Created engaging content for federal officials, transit advocates, and riders; managed communication strategies for the Office of Quality, Compliance & Oversight and crafted multichannel plans for change adoption.</li>
+          <li><strong>Conceived and led delivery of a centralized Workforce Segmentation Database</strong>, consolidating disparate data across four departments to build a 360° profile of 8,171+ employees by role type, union affiliation, safety status, and digital access — enabling rapid change impact assessment across 5+ major initiatives. <span class="highlight">Originated</span></li>
+          <li>Built a brand style guide aligned with QCO and MBTA's strategy; developed reusable templates and training to accelerate adoption across the organization.</li>
+          <li>Collaborated with subject-matter experts to produce simplified policy content for riders and workforce across print, TSTOP, TCOMMS, video, and MBTA.com.</li>
+          <li>Facilitated cross-departmental workshops to drive workplace communication strategy and organizational alignment.</li>
+          <li>Enhanced digital engagement through improved video, newsletter, blog, print, and survey communications.</li>
+        </ul>
+      </div>
+
+      <!-- J-PAL -->
+      <div class="exp-entry">
+        <div class="exp-top">
+          <div class="exp-role">Global Digital Content & UX Strategist</div>
+          <div class="exp-date">Oct 2022 — Nov 2023</div>
+        </div>
+        <div class="exp-org">Abdul Latif Jameel Poverty Action Lab (J-PAL) · MIT</div>
+        <div class="exp-tools">
+          <span class="tool-tag">HTML</span><span class="tool-tag">Drupal</span><span class="tool-tag">Sketch</span>
+          <span class="tool-tag">Figma</span><span class="tool-tag">Salesforce</span>
+          <span class="tool-tag">Pardot</span><span class="tool-tag">Adobe Premiere</span><span class="tool-tag">Trello</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Developed holistic UX across multiple platforms, expanding vendor partnerships to increase digital capacity across seven global regional offices.</li>
+          <li>Designed and launched a redesigned research resources hub with improved taxonomy and search — delivering a scalable architecture for hundreds of publications on a <strong>3-month donor-constrained deadline</strong>.</li>
+          <li>Implemented Drupal Layout Builder, enabling global teams to publish and edit landing pages without code or web-team tickets — a workflow transformation for 7 offices worldwide.</li>
+          <li>Conducted user testing and heat mapping, resulting in a <strong>30% increase in event and newsletter conversions</strong>.</li>
+          <li>Produced 30+ interview videos from participants worldwide, elevating brand recognition globally.</li>
+          <li>Developed and launched HarvardOnline.Harvard.edu, improving search rankings and enabling user-generated VideoAsk content.</li>
+          <li>Established an email program for HBSO and edX, <strong>generating over $300,000 in the first year</strong>.</li>
+        </ul>
+      </div>
+
+      <!-- Harvard UX -->
+      <div class="exp-entry">
+        <div class="exp-top">
+          <div class="exp-role">UX Strategist & Digital Communications Manager</div>
+          <div class="exp-date">Feb 2021 — Oct 2022</div>
+        </div>
+        <div class="exp-org">Harvard University</div>
+        <div class="exp-tools">
+          <span class="tool-tag">Sketch</span><span class="tool-tag">Google Analytics</span>
+          <span class="tool-tag">Trello</span><span class="tool-tag">Ahrefs</span><span class="tool-tag">Google AdWords</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Created web, email, and social media content across multiple Harvard Online brands, leveraging faculty and learner stories through copy, graphics, and video.</li>
+          <li>Managed end-to-end website builds from wireframe through launch, overseeing backend development, SEO strategy, and vendor projects.</li>
+          <li>Led focus groups and created briefs for 20+ templates and microsites, improving stakeholder visibility and content consistency.</li>
+        </ul>
+      </div>
+
+      <!-- Biden -->
+      <div class="exp-entry">
+        <div class="exp-top">
+          <div class="exp-role">UX & Merchandise Strategist (National)</div>
+          <div class="exp-date">Mar 2020 — Jan 2021</div>
+        </div>
+        <div class="exp-org">Biden Victory Fund</div>
+        <div class="exp-tools">
+          <span class="tool-tag">Adobe Creative Suite</span><span class="tool-tag">Sketch</span>
+          <span class="tool-tag">Hotjar</span><span class="tool-tag">Google Analytics</span><span class="tool-tag">Drupal</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Enhanced page engagement and site optimization by implementing new tools and features in collaboration with vendors and designers on a high-traffic national campaign store.</li>
+          <li>Managed daily analytics and A/B testing on a tight election-cycle deadline to continually optimize donor engagement.</li>
+        </ul>
+      </div>
+
+      <!-- Warren -->
+      <div class="exp-entry">
+        <div class="exp-top">
+          <div class="exp-role">UX Strategist & Digital Merchandise Manager (National)</div>
+          <div class="exp-date">Sep 2019 — Mar 2020</div>
+        </div>
+        <div class="exp-org">Warren for President</div>
+        <div class="exp-tools">
+          <span class="tool-tag">Sketch</span><span class="tool-tag">Shopify</span>
+          <span class="tool-tag">Google Analytics</span><span class="tool-tag">Adobe Premiere</span><span class="tool-tag">Photoshop</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Led full site redesign for shop.elizabethwarren.com — new visual identity, optimized category architecture, and data-driven product layout — driving a <strong>120% increase in overall sales</strong>.</li>
+          <li>Introduced a two-part contribution module at checkout, <strong>generating over $500K in campaign revenue without any additional overhead</strong> — a feature later adopted by industry competitors. <span class="highlight">Originated</span></li>
+          <li>Implemented "You May Also Like" cross-merchandising across all product pages, increasing average order value.</li>
+        </ul>
+      </div>
+
+      <!-- TOMS -->
+      <div class="exp-entry">
+        <div class="exp-top">
+          <div class="exp-role">Site Merchandise Manager</div>
+          <div class="exp-date">Aug 2018 — Sep 2019</div>
+        </div>
+        <div class="exp-org">TOMS Shoes</div>
+        <div class="exp-tools">
+          <span class="tool-tag">Adobe Creative Suite</span><span class="tool-tag">Sketch</span>
+          <span class="tool-tag">Pardot</span><span class="tool-tag">Oracle</span><span class="tool-tag">Adobe XM</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Created and managed content for TOMS' digital platform across two localized websites with <strong>100M+ annual sessions</strong>.</li>
+          <li>Delivered executive-level Google Analytics reports, identifying trends that doubled traffic to luggage sections and reshaped marketing strategy.</li>
+          <li>Led user testing initiatives, presenting findings to C-suite to drive impactful sitewide improvements.</li>
+          <li>Designed wireframes for new product categories and implemented a 360-degree product visualizer to improve user interaction.</li>
+        </ul>
+      </div>
+
+      <!-- Thule -->
+      <div class="exp-entry">
+        <div class="exp-top">
+          <div class="exp-role">Web Content & E-Commerce Coordinator</div>
+          <div class="exp-date">Jan 2017 — Apr 2018</div>
+        </div>
+        <div class="exp-org">Thule Group</div>
+        <div class="exp-tools">
+          <span class="tool-tag">Adobe Creative Suite</span><span class="tool-tag">Sketch</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Managed 3 Thule Group websites across <strong>81 markets, 20 languages</strong>, with 20M+ annual sessions.</li>
+          <li>Managed copywriting and translation across all product lines and regional sites.</li>
+        </ul>
+      </div>
+
+    </div><!-- /section -->
+
+  </main>
+</div><!-- /page -->
+
+</body>
+</html>
