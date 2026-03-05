@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enhance User Experience — Warren for President · LC Digital Strategy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0b1628; --coral: #e8522a; --coral-light: #fde8e0;
+      --gold: #f5b942; --white: #fafaf8; --off: #f2efe9;
+      --muted: #7a7a72; --rule: #ddd9d0; --ink: #1c1c1a;
+      --page-accent: #8b1a1a;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'IBM Plex Sans', sans-serif; background: var(--white); color: var(--ink); line-height: 1.7; }
+
+    nav { padding: 20px 56px; display: flex; align-items: center; justify-content: space-between; background: var(--navy); position: sticky; top: 0; z-index: 100; }
+    nav .wordmark { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+    nav .wordmark span { color: var(--coral); }
+    nav .back { font-size: 0.73rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+    nav .back:hover { color: var(--coral); }
+
+    /* HERO */
+    .hero { background: var(--page-accent); padding: 90px 56px 72px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(245,185,66,0.2) 0%, transparent 65%); pointer-events: none; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--gold), var(--coral)); }
+    .hero-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5.5vw, 4.2rem); font-weight: 900; color: white; line-height: 1.08; margin-bottom: 20px; }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero-sub { font-size: 1.05rem; font-weight: 300; color: rgba(255,255,255,0.65); max-width: 540px; margin-bottom: 48px; }
+    .meta-strip { display: flex; flex-wrap: wrap; gap: 40px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 32px; }
+    .meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .meta-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .meta-value { font-size: 0.88rem; font-weight: 500; color: white; }
+
+    /* STAT BAR */
+    .stat-bar { background: var(--gold); display: grid; grid-template-columns: repeat(3, 1fr); }
+    .stat-item { padding: 32px 40px; border-right: 1px solid rgba(0,0,0,0.1); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--navy); line-height: 1; margin-bottom: 6px; }
+    .stat-desc { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(11,22,40,0.6); }
+
+    /* CONTENT */
+    .content { max-width: 820px; margin: 0 auto; padding: 80px 56px 100px; }
+    .section { margin-bottom: 72px; }
+    .section-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral); margin-bottom: 12px; display: block; }
+    .section h2 { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--ink); }
+    .section p { font-size: 0.96rem; font-weight: 300; color: #3a3a38; margin-bottom: 16px; max-width: 680px; }
+    .section p strong { color: var(--ink); font-weight: 500; }
+
+    .pull { background: var(--page-accent); padding: 36px 44px; margin: 56px 0; border-left: 4px solid var(--gold); }
+    .pull p { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-style: italic; color: white; line-height: 1.5; margin: 0; max-width: 100% !important; }
+
+    .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin: 32px 0; }
+    .result-card { background: var(--off); padding: 28px 32px; border-top: 3px solid var(--coral); }
+    .result-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--coral); margin-bottom: 8px; }
+    .result-card p { font-size: 0.83rem; color: var(--muted); font-weight: 400; margin: 0; }
+
+    footer { background: var(--navy); padding: 36px 56px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .f-brand { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+    .f-brand span { color: var(--coral); }
+    .f-back { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; font-family: 'IBM Plex Mono', monospace; }
+    .f-back:hover { color: var(--coral); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    .hero > * { animation: fadeUp 0.6s ease both; }
+    .hero > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero > *:nth-child(2) { animation-delay: 0.15s; }
+    .hero > *:nth-child(3) { animation-delay: 0.27s; }
+    .hero > *:nth-child(4) { animation-delay: 0.38s; }
+
+    @media (max-width: 680px) {
+      nav { padding: 16px 24px; }
+      .hero { padding: 64px 24px 56px; }
+      .stat-bar { grid-template-columns: 1fr 1fr; }
+      .content { padding: 56px 24px 80px; }
+      .results-grid { grid-template-columns: 1fr; }
+      footer { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="wordmark" href="index.html">LC<span> |</span> Digital Strategy</a>
+  <a class="back" href="index.html">← Back to Portfolio</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-tag">Warren for President · E-Commerce Optimization · 2019</div>
+  <h1><em>$500K</em> in New Revenue.<br>Zero New Overhead.</h1>
+  <p class="hero-sub">A full site overhaul, a smarter checkout experience, and a 120% increase in sales — all built inside a political campaign, on a campaign timeline, with campaign-level stakes.</p>
+  <div class="meta-strip">
+    <div class="meta-item"><span class="meta-label">My Role</span><span class="meta-value">Lead Strategist, UX & E-Commerce</span></div>
+    <div class="meta-item"><span class="meta-label">Platform</span><span class="meta-value">shop.elizabethwarren.com</span></div>
+    <div class="meta-item"><span class="meta-label">Start Date</span><span class="meta-value">Late September 2019</span></div>
+    <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-value">Redesign · UX · YMAL · Checkout Module</span></div>
+  </div>
+</header>
+
+<div class="stat-bar">
+  <div class="stat-item"><div class="stat-num">120%</div><div class="stat-desc">Increase in Overall Sales</div></div>
+  <div class="stat-item"><div class="stat-num">$500K+</div><div class="stat-desc">Revenue from Checkout Module</div></div>
+  <div class="stat-item"><div class="stat-num">$0</div><div class="stat-desc">Additional Overhead Incurred</div></div>
+</div>
+
+<main class="content">
+
+  <div class="section">
+    <span class="section-num">// 01 — The Challenge</span>
+    <h2>When the Store Is the Campaign</h2>
+    <p>Campaign merchandise isn't just merch — it's a fundraising channel, a community signal, and an engagement tool all at once. When a supporter buys a shirt, they're not just getting a shirt. They're buying into the campaign, telling their friends, and putting money directly into the fight.</p>
+    <p>The Warren for President store had a loyal audience and a strong product. What it needed was an experience worthy of both. The site wasn't converting the way it should, the navigation wasn't surfacing the right products to the right people, and there was a significant opportunity sitting untouched in the checkout flow.</p>
+    <p>I was brought in to fix all of it — and to do it fast, because in a presidential campaign, <strong>there's no such thing as "let's revisit next quarter."</strong></p>
+  </div>
+
+  <div class="pull">
+    <p>"A campaign store is basically a startup e-commerce operation running at full speed inside one of the most intense work environments on the planet. I loved every second of it."</p>
+  </div>
+
+  <div class="section">
+    <span class="section-num">// 02 — The Overhaul</span>
+    <h2>Redesign First, Then Build on Top</h2>
+    <p>I led a full site redesign starting in late September 2019 — new visual identity, new category architecture, new product layouts, new copy. Working with UX/UI designers and the development team, we rebuilt the store's look and feel from the ground up, using conversion data and analytics to guide every structural decision.</p>
+    <p>The category and subcategory layouts were especially data-driven: where products sat on the page, how promotions were surfaced, what the first thing a visitor saw when they landed — all of it tested and iterated. The result was a site that didn't just look better. It performed better at every step of the funnel.</p>
+    <p>We also built out a "You May Also Like" cross-merchandising strategy across all product pages — giving visitors relevant suggestions based on what they were already looking at, and pulling them deeper into the catalogue rather than letting them bounce after one item.</p>
+  </div>
+
+  <div class="section">
+    <span class="section-num">// 03 — The Big Idea</span>
+    <h2>The Checkout Module That Changed Everything</h2>
+    <p>This is the one I'm most proud of. During the checkout process, we introduced a two-part contribution module that gave supporters the option to make an additional donation to the campaign before completing their purchase. Clean, non-intrusive, frictionless to opt into — and enormously effective.</p>
+    <p>The module generated <strong>over $500,000 in campaign contributions</strong> — without adding any overhead, any new products, or any additional traffic. It was pure conversion optimization: finding value that was already there and building a path to capture it.</p>
+    <p>It's the kind of result that sounds simple in retrospect and is anything but simple to execute. Getting the UX right so it feels like a natural part of the flow, not a desperate ask — that's the work.</p>
+  </div>
+
+  <div class="results-grid">
+    <div class="result-card">
+      <h3>120%</h3>
+      <p>Increase in overall store sales following redesign and optimization</p>
+    </div>
+    <div class="result-card">
+      <h3>$500K+</h3>
+      <p>In additional campaign revenue from the checkout contribution module alone</p>
+    </div>
+    <div class="result-card">
+      <h3>↑ AOV</h3>
+      <p>Average order value improved through YMAL cross-merchandising across all product pages</p>
+    </div>
+    <div class="result-card">
+      <h3>$0</h3>
+      <p>Additional overhead incurred — all gains achieved through smarter experience design</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="section-num">// 04 — What I Learned</span>
+    <h2>Good UX Is Just Respect for the User's Time</h2>
+    <p>What this project reinforced for me is that conversion optimization isn't about tricks — it's about removing friction and building trust. Every element of the redesign was in service of one thing: making it easier for someone who already wanted to engage to actually do it.</p>
+    <p>The checkout module worked because it didn't feel like an ambush. It felt like an opportunity that made sense in context. That's the difference between dark patterns and good design — and it's a line I think about on every project I work on.</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="f-brand">LC<span> |</span> Digital Strategy · Boston, MA</div>
+  <a class="f-back" href="index.html">← Back to Portfolio</a>
+</footer>
+
+</body>
+</html>

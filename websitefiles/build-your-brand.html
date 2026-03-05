@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Build Your Brand — Harvard Online · LC Digital Strategy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0b1628; --coral: #e8522a; --coral-light: #fde8e0;
+      --gold: #f5b942; --white: #fafaf8; --off: #f2efe9;
+      --muted: #7a7a72; --rule: #ddd9d0; --ink: #1c1c1a;
+      --page-accent: #1a3a6b;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'IBM Plex Sans', sans-serif; background: var(--white); color: var(--ink); line-height: 1.7; }
+
+    nav { padding: 20px 56px; display: flex; align-items: center; justify-content: space-between; background: var(--navy); position: sticky; top: 0; z-index: 100; }
+    nav .wordmark { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+    nav .wordmark span { color: var(--coral); }
+    nav .back { font-size: 0.73rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+    nav .back:hover { color: var(--coral); }
+
+    /* HERO */
+    .hero { background: var(--page-accent); padding: 90px 56px 72px; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--coral), var(--gold)); }
+    .hero-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5.5vw, 4.2rem); font-weight: 900; color: white; line-height: 1.1; margin-bottom: 20px; }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero-sub { font-size: 1.05rem; font-weight: 300; color: rgba(255,255,255,0.65); max-width: 540px; margin-bottom: 48px; }
+    .meta-strip { display: flex; flex-wrap: wrap; gap: 40px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 32px; }
+    .meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .meta-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .meta-value { font-size: 0.88rem; font-weight: 500; color: white; }
+
+    /* STAT BAR */
+    .stat-bar { background: var(--gold); display: grid; grid-template-columns: repeat(3, 1fr); }
+    .stat-item { padding: 32px 40px; border-right: 1px solid rgba(0,0,0,0.1); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--navy); line-height: 1; margin-bottom: 6px; }
+    .stat-desc { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(11,22,40,0.6); }
+
+    /* CONTENT */
+    .content { max-width: 820px; margin: 0 auto; padding: 80px 56px 100px; }
+    .section { margin-bottom: 72px; }
+    .section-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral); margin-bottom: 12px; display: block; }
+    .section h2 { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--ink); }
+    .section p { font-size: 0.96rem; font-weight: 300; color: #3a3a38; margin-bottom: 16px; max-width: 680px; }
+    .section p:last-child { margin-bottom: 0; }
+    .section p strong { color: var(--ink); font-weight: 500; }
+
+    .pull { background: var(--page-accent); padding: 36px 44px; margin: 56px 0; border-left: 4px solid var(--gold); }
+    .pull p { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-style: italic; color: white; line-height: 1.5; margin: 0; max-width: 100% !important; }
+
+    .highlight-box { background: var(--off); border: 1px solid var(--rule); padding: 32px 36px; margin: 32px 0; }
+    .highlight-box h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+    .highlight-box p { font-size: 0.88rem; color: #555; margin-bottom: 0; }
+
+    footer { background: var(--navy); padding: 36px 56px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .f-brand { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+    .f-brand span { color: var(--coral); }
+    .f-back { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; font-family: 'IBM Plex Mono', monospace; }
+    .f-back:hover { color: var(--coral); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    .hero > * { animation: fadeUp 0.6s ease both; }
+    .hero > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero > *:nth-child(2) { animation-delay: 0.15s; }
+    .hero > *:nth-child(3) { animation-delay: 0.27s; }
+    .hero > *:nth-child(4) { animation-delay: 0.38s; }
+
+    @media (max-width: 680px) {
+      nav { padding: 16px 24px; }
+      .hero { padding: 64px 24px 56px; }
+      .stat-bar { grid-template-columns: 1fr 1fr; }
+      .content { padding: 56px 24px 80px; }
+      footer { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="wordmark" href="index.html">LC<span> |</span> Digital Strategy</a>
+  <a class="back" href="index.html">← Back to Portfolio</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-tag">Harvard Online · Digital Brand · 2021</div>
+  <h1>Building a Brand for<br><em>One of the Most Recognizable</em><br>Institutions on Earth.</h1>
+  <p class="hero-sub">When Harvard Online needed a digital home, they needed it fast — and they needed it to feel worthy of the name. Four months. One strategist. Let's go.</p>
+  <div class="meta-strip">
+    <div class="meta-item"><span class="meta-label">My Role</span><span class="meta-value">Digital Communication Strategist</span></div>
+    <div class="meta-item"><span class="meta-label">Organization</span><span class="meta-value">Harvard Online</span></div>
+    <div class="meta-item"><span class="meta-label">Timeline</span><span class="meta-value">4 Months</span></div>
+    <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-value">Website · Brand · UX · Content</span></div>
+  </div>
+</header>
+
+<div class="stat-bar">
+  <div class="stat-item"><div class="stat-num">4</div><div class="stat-desc">Months to Full Launch</div></div>
+  <div class="stat-item"><div class="stat-num">1</div><div class="stat-desc">New Digital Brand Built</div></div>
+  <div class="stat-item"><div class="stat-num">∞</div><div class="stat-desc">Learners Reached Globally</div></div>
+</div>
+
+<main class="content">
+
+  <div class="section">
+    <span class="section-num">// 01 — The Challenge</span>
+    <h2>A New Name Needs a New Home</h2>
+    <p>Harvard Online had something most brands would kill for: instant recognition. What it didn't have was a digital presence worthy of it. In October 2021, the organization made the decision to establish a dedicated online home for its growing catalogue of courses — and set an ambitious four-month deadline to get there.</p>
+    <p>That timeline was, to put it charitably, <strong>daunting</strong>. Building a website from discovery through design through development through launch in four months requires everything to go right: clear decision-making, tight stakeholder alignment, and someone who can hold the whole vision together while managing a thousand details simultaneously.</p>
+    <p>I was that person.</p>
+  </div>
+
+  <div class="pull">
+    <p>"Four months to build a website for Harvard. No pressure. I immediately opened a spreadsheet and got to work."</p>
+  </div>
+
+  <div class="section">
+    <span class="section-num">// 02 — The Build</span>
+    <h2>End-to-End, No Shortcuts</h2>
+    <p>I led the project from the initial discovery phase straight through to launch day. That meant managing external vendors, driving internal stakeholder reviews, making design calls under time pressure, and writing copy that could hold its own next to the Harvard name.</p>
+    <p>The course pages were the critical piece — they're where prospective learners make enrollment decisions, so every word, every layout choice, every UX pattern had to earn its place. I designed wireframes for all pages with a close eye on conversion, went through multiple rounds of feedback, and pushed hard for designs that were both intuitive and compelling.</p>
+    <p>We made the deadline. The site launched on time, and HarvardOnline.com became the centralized hub it needed to be — a brand that could grow into the institution behind it.</p>
+  </div>
+
+  <div class="section">
+    <span class="section-num">// 03 — Beyond the Launch</span>
+    <h2>Making the Learner the Story</h2>
+    <p>A strong website is table stakes. What makes a brand feel real is the people behind it — and Harvard Online's learners are genuinely remarkable. Students from every country, every background, every career stage. Each of them with a story worth telling.</p>
+    <p>I developed a process for capturing learner testimonials through video, designing a collection approach that worked across Harvard Online's global audience. Those stories didn't just live on the site — they powered email campaigns, social content, and ultimately shaped how the team thought about <strong>what courses to build next</strong>. Real feedback from real learners, turned into product insight.</p>
+    <p>I also built the templates and content systems that the team would use long after launch — brand guidelines, reusable page structures, content playbooks — so the brand could keep growing consistently without having to rebuild from scratch every time.</p>
+  </div>
+
+  <div class="highlight-box">
+    <h3>What This Project Required</h3>
+    <p>Website strategy and architecture · UX wireframing and stakeholder review · Vendor management · Brand-aligned copywriting · Learner testimonial video program · Email and social campaign assets · Templates and brand documentation for long-term use.</p>
+  </div>
+
+  <div class="section">
+    <span class="section-num">// 04 — Takeaway</span>
+    <h2>The Brand Was Always There. It Just Needed a Home.</h2>
+    <p>The most important thing I learned working on this project is that a recognizable name is an asset and a responsibility at the same time. Every design choice, every line of copy, every UX decision either honors the brand or erodes it. You don't get to be sloppy just because the logo is famous.</p>
+    <p>What I built for Harvard Online wasn't just a website — it was a foundation. A set of systems, standards, and stories that the team could build on. That's the kind of work I care about most: not just launching something, but building something that lasts.</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="f-brand">LC<span> |</span> Digital Strategy · Boston, MA</div>
+  <a class="f-back" href="index.html">← Back to Portfolio</a>
+</footer>
+
+</body>
+</html>

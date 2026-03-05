@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LC Digital Strategy — Layna Martinez</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0b1628; --coral: #e8522a; --coral-light: #fde8e0;
+      --gold: #f5b942; --white: #fafaf8; --off: #f2efe9;
+      --muted: #7a7a72; --rule: #ddd9d0; --ink: #1c1c1a;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'IBM Plex Sans', sans-serif; background: var(--white); color: var(--ink); line-height: 1.7; }
+
+    /* NAV */
+    nav { padding: 20px 56px; display: flex; align-items: center; justify-content: space-between; background: var(--navy); position: sticky; top: 0; z-index: 100; }
+    nav .wordmark { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+    nav .wordmark span { color: var(--coral); }
+    nav .nav-links { display: flex; gap: 32px; }
+    nav .nav-links a { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    nav .nav-links a:hover { color: var(--coral); }
+
+    /* HERO */
+    .hero {
+      background: var(--navy);
+      padding: 100px 56px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,82,42,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--coral), var(--gold), var(--coral));
+    }
+    .hero-inner { max-width: 900px; position: relative; }
+    .hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-eyebrow::before { content: '//'; opacity: 0.5; }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 32px;
+    }
+    .hero h1 em { font-style: italic; color: var(--coral); }
+    .hero h1 .line2 { display: block; color: rgba(255,255,255,0.35); font-weight: 400; }
+    .hero-desc {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      max-width: 560px;
+      margin-bottom: 48px;
+    }
+    .hero-desc strong { color: var(--white); font-weight: 500; }
+    .cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--coral);
+      color: white;
+      padding: 14px 32px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: #c94420; transform: translateY(-2px); }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.7);
+      padding: 14px 32px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--coral); color: var(--coral); }
+
+    /* MARQUEE */
+    .marquee-strip {
+      background: var(--coral);
+      overflow: hidden;
+      padding: 10px 0;
+      white-space: nowrap;
+    }
+    .marquee-inner {
+      display: inline-block;
+      animation: marquee 22s linear infinite;
+    }
+    .marquee-inner span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: white;
+      padding: 0 28px;
+    }
+    .marquee-inner span::after { content: '·'; padding-left: 28px; opacity: 0.5; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ABOUT */
+    .about { max-width: 1060px; margin: 0 auto; padding: 88px 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .about-left {}
+    .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral); margin-bottom: 20px; }
+    .about h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 24px; }
+    .about h2 em { font-style: italic; color: var(--coral); }
+    .about p { font-size: 0.95rem; font-weight: 300; color: #444; margin-bottom: 16px; }
+    .about p strong { color: var(--ink); font-weight: 500; }
+    .about-right {}
+    .skills-grid { display: flex; flex-direction: column; gap: 2px; }
+    .skill-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px;
+      background: var(--off);
+      border-left: 3px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: default;
+    }
+    .skill-row:hover { border-left-color: var(--coral); background: var(--coral-light); }
+    .skill-name { font-size: 0.85rem; font-weight: 500; }
+    .skill-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+    /* BRANDS */
+    .brands { background: var(--off); padding: 56px; text-align: center; }
+    .brands .section-label { justify-content: center; display: block; margin-bottom: 32px; }
+    .brand-list { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .brand-pill { background: white; border: 1px solid var(--rule); padding: 8px 20px; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.05em; color: var(--ink); }
+
+    /* PORTFOLIO */
+    .portfolio { max-width: 1060px; margin: 0 auto; padding: 88px 56px; }
+    .portfolio-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 48px; padding-bottom: 20px; border-bottom: 2px solid var(--ink); }
+    .portfolio-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 700; }
+    .portfolio-header a { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .portfolio-header a:hover { color: var(--coral); }
+
+    .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+    .case-card {
+      background: var(--navy);
+      padding: 48px 40px;
+      text-decoration: none;
+      color: white;
+      display: block;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .case-card:hover { transform: scale(1.01); }
+    .case-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--coral);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .case-card:hover::before { transform: scaleX(1); }
+    .case-card.accent { background: var(--coral); }
+    .case-card.gold { background: var(--gold); color: var(--navy); }
+    .case-card.light { background: var(--off); color: var(--navy); }
+    .case-card.light::before, .case-card.gold::before { background: var(--navy); }
+    .card-org { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.6; margin-bottom: 16px; }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; line-height: 1.25; margin-bottom: 12px; }
+    .card-desc { font-size: 0.85rem; font-weight: 300; opacity: 0.75; margin-bottom: 28px; line-height: 1.6; }
+    .card-cta { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7; display: flex; align-items: center; gap: 8px; }
+    .card-cta::after { content: '→'; font-size: 0.9rem; }
+
+    /* CONTACT */
+    .contact { background: var(--navy); padding: 100px 56px; text-align: center; position: relative; overflow: hidden; }
+    .contact::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, rgba(232,82,42,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact h2 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; color: white; margin-bottom: 20px; position: relative; }
+    .contact h2 em { color: var(--coral); font-style: italic; }
+    .contact p { font-size: 1rem; color: rgba(255,255,255,0.5); margin-bottom: 40px; font-weight: 300; position: relative; }
+    .contact a.email-btn {
+      display: inline-block;
+      background: var(--coral);
+      color: white;
+      padding: 18px 48px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      position: relative;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .contact a.email-btn:hover { background: #c94420; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: #060e1a; padding: 32px 56px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    footer .f-brand { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+    footer .f-brand span { color: var(--coral); }
+    footer .f-right { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-inner > * { animation: fadeUp 0.7s ease both; }
+    .hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero-inner > *:nth-child(2) { animation-delay: 0.15s; }
+    .hero-inner > *:nth-child(3) { animation-delay: 0.28s; }
+    .hero-inner > *:nth-child(4) { animation-delay: 0.4s; }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      nav .nav-links { display: none; }
+      .hero { padding: 72px 24px 64px; }
+      .about { grid-template-columns: 1fr; gap: 48px; padding: 64px 24px; }
+      .portfolio { padding: 64px 24px; }
+      .case-grid { grid-template-columns: 1fr; }
+      .brands { padding: 48px 24px; }
+      .contact { padding: 72px 24px; }
+      footer { padding: 28px 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="wordmark" href="index.html">LC<span> |</span> Digital Strategy</a>
+  <div class="nav-links">
+    <a href="portfolio.html">Portfolio</a>
+    <a href="mailto:layna.davis@gmail.com">Get in Touch</a>
+    <a href="LCDesignResume.pdf" target="_blank">Resume ↗</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Digital Strategy · UX · Change Communication</div>
+    <h1>I make<br><em>complex things</em><br><span class="line2">land.</span></h1>
+    <p class="hero-desc">
+      I'm <strong>Layna Martinez</strong> — a digital strategist who geeks out on user personas, audience optimization, 
+      multichannel campaigns, and yes, the very satisfying science of weekly metrics going up and to the right. 
+      I've done this for some places you've definitely heard of.
+    </p>
+    <div class="cta-row">
+      <a href="portfolio.html" class="btn-primary">See My Work</a>
+      <a href="LCDesignResume.pdf" target="_blank" class="btn-outline">View Resume</a>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>UX Strategy</span><span>Change Management</span><span>Digital Ecosystems</span>
+    <span>Audience Optimization</span><span>Content Strategy</span><span>Data Visualization</span>
+    <span>Brand Systems</span><span>Multichannel Communications</span><span>User Research</span>
+    <span>UX Strategy</span><span>Change Management</span><span>Digital Ecosystems</span>
+    <span>Audience Optimization</span><span>Content Strategy</span><span>Data Visualization</span>
+    <span>Brand Systems</span><span>Multichannel Communications</span><span>User Research</span>
+  </div>
+</div>
+
+<section class="about">
+  <div class="about-left">
+    <div class="section-label">// About Me</div>
+    <h2>I think about <em>who's on the other end</em> of everything.</h2>
+    <p>My whole career has been about one question: <strong>what actually gets through?</strong> Not what looks good in a deck — what connects, moves people, changes behavior, and sticks.</p>
+    <p>I've built digital brands from the ground up, led data-driven communications for a major transit authority, optimized e-commerce experiences to the tune of $500K in new revenue, and helped a world-class research organization completely rethink how it delivers information to its users.</p>
+    <p>Whether I'm mapping a 8,000-person workforce into a Tableau database or rewriting a homepage at midnight before a launch, <strong>my obsession is the same: make it land</strong>.</p>
+    <p>Boston-based. Open to remote and hybrid. Always looking for the next hard problem.</p>
+  </div>
+  <div class="about-right">
+    <div class="section-label">// What I Do</div>
+    <div class="skills-grid">
+      <div class="skill-row"><span class="skill-name">Digital Strategy & UX</span><span class="skill-tag">Core</span></div>
+      <div class="skill-row"><span class="skill-name">Change Communication</span><span class="skill-tag">Core</span></div>
+      <div class="skill-row"><span class="skill-name">Audience Segmentation</span><span class="skill-tag">Data</span></div>
+      <div class="skill-row"><span class="skill-name">Brand Development</span><span class="skill-tag">Creative</span></div>
+      <div class="skill-row"><span class="skill-name">Content Strategy</span><span class="skill-tag">Creative</span></div>
+      <div class="skill-row"><span class="skill-name">Data Visualization (Tableau)</span><span class="skill-tag">Data</span></div>
+      <div class="skill-row"><span class="skill-name">Multichannel Campaigns</span><span class="skill-tag">Core</span></div>
+      <div class="skill-row"><span class="skill-name">E-Commerce Optimization</span><span class="skill-tag">Growth</span></div>
+      <div class="skill-row"><span class="skill-name">Stakeholder Engagement</span><span class="skill-tag">Strategy</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="brands">
+  <div class="section-label">// Organizations I've worked with</div>
+  <div class="brand-list">
+    <div class="brand-pill">MBTA</div>
+    <div class="brand-pill">Harvard University</div>
+    <div class="brand-pill">MIT / J-PAL</div>
+    <div class="brand-pill">Warren for President</div>
+    <div class="brand-pill">Biden Victory Fund</div>
+    <div class="brand-pill">TOMS Shoes</div>
+  </div>
+</div>
+
+<section class="portfolio">
+  <div class="portfolio-header">
+    <h2>Selected Work</h2>
+    <a href="portfolio.html">View all →</a>
+  </div>
+  <div class="case-grid">
+    <a class="case-card" href="workforce-segmentation.html">
+      <div class="card-org">MBTA · QCO · 2025</div>
+      <div class="card-title">A 360° View of the Workforce</div>
+      <div class="card-desc">Built the MBTA's first Workforce Segmentation Database from scratch — mapping 8,171 employees across 573 job codes to power smarter change initiatives.</div>
+      <div class="card-cta">Read Case Study</div>
+    </a>
+    <a class="case-card light" href="build-your-brand.html">
+      <div class="card-org">Harvard Online · 2021</div>
+      <div class="card-title">Building Harvard Online's Brand</div>
+      <div class="card-desc">Launched a brand-new digital home for Harvard Online — end-to-end, in four months, and under the eyes of one of the most recognizable institutions on earth.</div>
+      <div class="card-cta">Read Case Study</div>
+    </a>
+    <a class="case-card gold" href="enhance-user-experiences.html">
+      <div class="card-org">Warren for President · 2019</div>
+      <div class="card-title">$500K in New Revenue. Zero New Overhead.</div>
+      <div class="card-desc">Redesigned the campaign store and introduced a checkout contribution module that drove a 120% sales increase without adding a dime in overhead costs.</div>
+      <div class="card-cta">Read Case Study</div>
+    </a>
+    <a class="case-card accent" href="research-optimization.html">
+      <div class="card-org">MIT / J-PAL · 2023</div>
+      <div class="card-title">Research That People Can Actually Find</div>
+      <div class="card-desc">Redesigned J-PAL's research resource experience for their 20th anniversary — rebuilding taxonomy, search, and the backend so teams worldwide could publish without writing a line of code.</div>
+      <div class="card-cta">Read Case Study</div>
+    </a>
+  </div>
+</section>
+
+<section class="contact">
+  <h2>Let's make <em>something</em><br>worth talking about.</h2>
+  <p>Always interested in interesting problems. Drop me a line.</p>
+  <a href="mailto:layna.davis@gmail.com" class="email-btn">Get in Touch</a>
+</section>
+
+<footer>
+  <div class="f-brand">LC<span> |</span> Digital Strategy · Boston, MA</div>
+  <div class="f-right">Est. 2023</div>
+</footer>
+
+</body>
+</html>

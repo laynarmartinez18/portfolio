@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Research Optimization — J-PAL · LC Digital Strategy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0b1628; --coral: #e8522a; --coral-light: #fde8e0;
+      --gold: #f5b942; --white: #fafaf8; --off: #f2efe9;
+      --muted: #7a7a72; --rule: #ddd9d0; --ink: #1c1c1a;
+      --page-accent: #1e4d38;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'IBM Plex Sans', sans-serif; background: var(--white); color: var(--ink); line-height: 1.7; }
+
+    nav { padding: 20px 56px; display: flex; align-items: center; justify-content: space-between; background: var(--navy); position: sticky; top: 0; z-index: 100; }
+    nav .wordmark { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+    nav .wordmark span { color: var(--coral); }
+    nav .back { font-size: 0.73rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+    nav .back:hover { color: var(--coral); }
+
+    .hero { background: var(--page-accent); padding: 90px 56px 72px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; bottom: -100px; left: -60px; width: 350px; height: 350px; border-radius: 50%; background: radial-gradient(circle, rgba(245,185,66,0.15) 0%, transparent 65%); pointer-events: none; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--gold), var(--coral)); }
+    .hero-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5.5vw, 4.2rem); font-weight: 900; color: white; line-height: 1.08; margin-bottom: 20px; }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero-sub { font-size: 1.05rem; font-weight: 300; color: rgba(255,255,255,0.65); max-width: 540px; margin-bottom: 48px; }
+    .meta-strip { display: flex; flex-wrap: wrap; gap: 40px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 32px; }
+    .meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .meta-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .meta-value { font-size: 0.88rem; font-weight: 500; color: white; }
+
+    .stat-bar { background: var(--page-accent); display: grid; grid-template-columns: repeat(3, 1fr); }
+    .stat-item { padding: 32px 40px; border-right: 1px solid rgba(255,255,255,0.1); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+    .stat-desc { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+    .content { max-width: 820px; margin: 0 auto; padding: 80px 56px 100px; }
+    .section { margin-bottom: 72px; }
+    .section-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral); margin-bottom: 12px; display: block; }
+    .section h2 { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--ink); }
+    .section p { font-size: 0.96rem; font-weight: 300; color: #3a3a38; margin-bottom: 16px; max-width: 680px; }
+    .section p strong { color: var(--ink); font-weight: 500; }
+
+    .pull { background: var(--page-accent); padding: 36px 44px; margin: 56px 0; border-left: 4px solid var(--gold); }
+    .pull p { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-style: italic; color: white; line-height: 1.5; margin: 0; max-width: 100% !important; }
+
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin: 32px 0; }
+    .col-card { background: var(--off); padding: 28px 28px; border-top: 3px solid var(--page-accent); }
+    .col-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+    .col-card p { font-size: 0.82rem; font-weight: 300; color: var(--muted); margin: 0; }
+
+    footer { background: var(--navy); padding: 36px 56px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .f-brand { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+    .f-brand span { color: var(--coral); }
+    .f-back { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; font-family: 'IBM Plex Mono', monospace; }
+    .f-back:hover { color: var(--coral); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    .hero > * { animation: fadeUp 0.6s ease both; }
+    .hero > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero > *:nth-child(2) { animation-delay: 0.15s; }
+    .hero > *:nth-child(3) { animation-delay: 0.27s; }
+    .hero > *:nth-child(4) { animation-delay: 0.38s; }
+
+    @media (max-width: 680px) {
+      nav { padding: 16px 24px; }
+      .hero { padding: 64px 24px 56px; }
+      .stat-bar { grid-template-columns: 1fr; }
+      .content { padding: 56px 24px 80px; }
+      .three-col { grid-template-columns: 1fr; }
+      footer { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="wordmark" href="index.html">LC<span> |</span> Digital Strategy</a>
+  <a class="back" href="index.html">← Back to Portfolio</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-tag">MIT / J-PAL · UX Strategy · Research Optimization · 2023</div>
+  <h1>Research That People<br>Can <em>Actually Find.</em></h1>
+  <p class="hero-sub">For J-PAL's 20th anniversary, I redesigned how one of the world's leading poverty research organizations shares its work — making years of critical knowledge accessible, discoverable, and maintainable by teams worldwide.</p>
+  <div class="meta-strip">
+    <div class="meta-item"><span class="meta-label">My Role</span><span class="meta-value">Digital Strategist, UX Lead</span></div>
+    <div class="meta-item"><span class="meta-label">Organization</span><span class="meta-value">MIT / Abdul Latif Jameel Poverty Action Lab</span></div>
+    <div class="meta-item"><span class="meta-label">Timeline</span><span class="meta-value">3 Months</span></div>
+    <div class="meta-item"><span class="meta-label">Platform</span><span class="meta-value">Drupal · povertyactionlab.org</span></div>
+  </div>
+</header>
+
+<div class="stat-bar">
+  <div class="stat-item"><div class="stat-num">3</div><div class="stat-desc">Months from Brief to Launch</div></div>
+  <div class="stat-item"><div class="stat-num">7</div><div class="stat-desc">Global Regional Offices Served</div></div>
+  <div class="stat-item"><div class="stat-num">0</div><div class="stat-desc">Lines of Code Required to Publish (after launch)</div></div>
+</div>
+
+<main class="content">
+
+  <div class="section">
+    <span class="section-num">// 01 — The Challenge</span>
+    <h2>A World-Class Research Library Nobody Could Navigate</h2>
+    <p>J-PAL exists to change the world through evidence — randomized evaluations and rigorous research that shapes how governments and organizations fight poverty across the globe. The work is genuinely important. But important work doesn't help anyone if the people who need it can't find it.</p>
+    <p>The legacy povertyactionlab.org site was built in 2016 for a fraction of the content it was now trying to house. Hundreds of research resources, toolkits, and publications had accumulated over the years, with no taxonomy designed to manage that scale. Search was weak. Discovery was frustrating. And the tools to fix it were locked away from the people who most needed to use them.</p>
+    <p>A key partner donation created the opportunity — and the constraint. <strong>Three months</strong> to redesign the research experience, rebuild the backend, and launch. I got to work immediately.</p>
+  </div>
+
+  <div class="pull">
+    <p>"Resources have value only if they can be found. That one principle was the north star for every decision I made on this project."</p>
+  </div>
+
+  <div class="section">
+    <span class="section-num">// 02 — The Strategy</span>
+    <h2>Think About Who's Searching, Then Build Backwards</h2>
+    <p>Before touching a single design file, I spent time understanding the users: who was coming to J-PAL's research resources, what they were trying to accomplish, and where the current experience was losing them. Researchers, policy practitioners, donors, journalists — each with different needs and different mental models for how to navigate a research archive.</p>
+    <p>From there, I mapped a new information architecture that accounted for the current catalogue and room to scale. Improved taxonomy, better search, a landing page redesign that helped users orient themselves immediately. Then I went into multiple rounds of stakeholder feedback with the internal team before we moved into development.</p>
+    <p>The resulting page was more dynamic, simpler to navigate, and built to grow — not just for the content J-PAL had, but for everything they'd add over the next five to ten years.</p>
+  </div>
+
+  <div class="section">
+    <span class="section-num">// 03 — The Infrastructure Fix</span>
+    <h2>The Backend Was Holding Everyone Back</h2>
+    <p>The research resource redesign was just the start. While deep in the project, I identified a bigger problem: the toolkit and resource templates across the site were completely inflexible. They could only be edited by the central web team, meaning regional offices around the world had to submit a web ticket every time they needed to make a change to their own content. That's not a content strategy — that's a bottleneck.</p>
+    <p>I led a competitive analysis of how other organizations handled this problem, ran team discussions to map the full scope of the need, and advocated for a backend solution that would actually fix it. What we implemented was J-PAL's rollout of Drupal's Layout Builder — giving teams around the world the ability to make templated changes to landing pages without touching HTML or CSS, and without waiting on a web ticket queue.</p>
+    <p>The result: seven regional offices could now update, publish, and customize their own content independently. That's a workflow transformation, not just a UX improvement.</p>
+  </div>
+
+  <div class="three-col">
+    <div class="col-card">
+      <h3>Research Resources Redesign</h3>
+      <p>New taxonomy, improved search, and a more dynamic landing page built to scale with hundreds of research materials.</p>
+    </div>
+    <div class="col-card">
+      <h3>Drupal Layout Builder</h3>
+      <p>New backend functionality gave global teams template-level control over landing pages — no code, no tickets required.</p>
+    </div>
+    <div class="col-card">
+      <h3>Southeast Asia at 10 Microsite</h3>
+      <p>The first of a global anniversary microsite template series, celebrating J-PAL's impact across its seven regional offices.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="section-num">// 04 — The Bigger Picture</span>
+    <h2>20 Years of Impact, Finally Visible</h2>
+    <p>As part of J-PAL's 20th anniversary, regional offices wanted to tell their stories — the donors they'd engaged, the policies they'd influenced, the research that had made it into the real world. That required a new kind of content template: something visually compelling, flexible enough to work across seven very different regional contexts, and fast enough to build under anniversary pressure.</p>
+    <p>I designed the first of these anniversary templates — the "Southeast Asia at 10" microsite — and built it as a reusable format that other offices could adapt. Rich visuals, structured narrative flow, optimized for donor engagement. A template that honored the weight of the work it was showcasing.</p>
+    <p>The through-line across all of it: <strong>get out of the way of the content</strong>. J-PAL's research is powerful on its own. My job was to build a digital environment where it could actually land.</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="f-brand">LC<span> |</span> Digital Strategy · Boston, MA</div>
+  <a class="f-back" href="index.html">← Back to Portfolio</a>
+</footer>
+
+</body>
+</html>
